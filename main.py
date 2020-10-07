@@ -3,7 +3,7 @@
 # Press Shift+F10 to execute it or replace it with your code.
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
 
-from flask import Flask, request, jsonify, render_template
+from flask import Flask, request, jsonify, render_template, flash, redirect
 from forms import RegistrationForm, LoginForm
 from config import Config
 app = Flask(__name__)
@@ -31,16 +31,24 @@ saved_notes = [
 ]
 
 
-@app.route('/register')
+@app.route('/register', methods=['GET', 'POST'])
 def register():
     # create an instance of a form
     form = RegistrationForm()
+    if form.validate_on_submit():
+        flash('Login requested for user {}'.format(
+            form.username.data))
+        return redirect('/index')
     return render_template('register.html', title='Sign Up', form=form)
 
 
-@app.route('/login')
+@app.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
+    if form.validate_on_submit():
+        flash('Login requested for user {}'.format(
+            form.username.data))
+        return redirect('/index')
     return render_template('login.html', title='Login', form=form)
 
 
