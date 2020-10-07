@@ -5,7 +5,7 @@
     <title>Title</title>
 </head>
 <body>
-    <h1>Login</h1>
+    <h1>Sign Up</h1>
     <form action="" method="post" novalidate>
         {{ form.hidden_tag() }}
         <p>
@@ -13,10 +13,22 @@
             {{ form.username(size=32) }}
         </p>
         <p>
+            {{ form.email.label }}<br>
+            {{ form.email(size=32) }}
+        </p>
+        <p>
             {{ form.password.label }}<br>
             {{ form.password(size=32) }}
         </p>
+        <p>
+            {{ form.confirm_password.label }}<br>
+            {{ form.confirm_password(size=32) }}
+        </p>
         <p>{{ form.submit() }}</p>
     </form>
+    <div>
+    Already a user?
+    <a href="/login">Login</a>
+</div>
 </body>
 </html>

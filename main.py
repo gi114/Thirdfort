@@ -34,8 +34,8 @@ saved_notes = [
 @app.route('/register')
 def register():
     # create an instance of a form
-    form = RegistrationForm
-    return render_template('registration.html', title='Sign up', form=form)
+    form = RegistrationForm()
+    return render_template('register.html', title='Sign Up', form=form)
 
 
 @app.route('/login')
