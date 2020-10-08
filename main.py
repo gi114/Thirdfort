@@ -11,12 +11,12 @@ app.config.from_object(Config)
 
 
 archived_notes = [
-    {'id': 4,
+    {'id': 3,
      'note': 'forth note',
-     'timestamp': '09:14:55'},
-    {'id': 5,
+     'timestamp': '11:44:06'},
+    {'id': 4,
      'note': 'fifth note',
-     'timestamp': '23:25:60'}
+     'timestamp': '01:39:00'}
 ]
 saved_notes = [
     {'id': 0,
@@ -35,6 +35,7 @@ saved_notes = [
 def register():
     # create an instance of a form
     form = RegistrationForm()
+    # TODO: if already registered redirect to login
     if form.validate_on_submit():
         flash('Login requested for user {}'.format(
             form.username.data))
@@ -45,6 +46,7 @@ def register():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
+    # TODO: if never registered redirect to register
     if form.validate_on_submit():
         flash('Login requested for user {}'.format(
             form.username.data))
@@ -56,18 +58,13 @@ def login():
 @app.route('/index')
 def index():
     user = {'username': 'Giulia'}
-    return render_template('index.html', title='Home', user=user, posts=saved_notes)
+    return render_template('index.html', title='Home - Saved Notes', user=user, posts=saved_notes)
 
 
-# A route to return all of the available entries in our catalog.
-@app.route('/saved_notes', methods=['GET'])
-def list_saved_notes():
-    return jsonify(saved_notes)
-
-
-@app.route('/archived_notes', methods=['GET'])
-def list_archived_notes():
-    return jsonify(archived_notes)
+@app.route('/archived', methods=['GET'])
+def archived():
+    user = {'username': 'Giulia'}
+    return render_template('archived.html', title='Home - Archived Notes', user=user, posts=archived_notes)
 
 
 # A route to return all of the available entries in our catalog.

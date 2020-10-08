@@ -7,9 +7,9 @@
 <body>
     <h1>Hello {{user.username}} </h1>
     {% if not posts %}
-    <div><p> List of saved notes is empty </p></div>
+    <div><p> List of archived notes is empty </p></div>
     {% else %}
-    <h3> Your saved notes: </h3>
+    <h3> Your archived notes: </h3>
     {% for post in posts %}
     <div><p>{{ post.note }}</p></div>
     {% endfor %}
