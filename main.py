@@ -83,11 +83,11 @@ def index():
 @app.route('/index/<note_id>', methods=['GET', 'POST'])
 def note(note_id):
     form = ModifyNoteForm()
-    title = None
-    for note in saved_notes:
-        if note['id'] == note_id:
-            index = saved_notes.index(note)
-            title = note['note']
+    for saved_note in saved_notes:
+        if saved_note['id'] == int(note_id):
+            idx = saved_notes.index(saved_note)
+            title = saved_note['note']
+
     return render_template('note.html', title=title, form=form)
 
 
