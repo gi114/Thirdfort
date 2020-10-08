@@ -9,10 +9,27 @@
     {% if not posts %}
     <div><p> List of saved notes is empty </p></div>
     {% else %}
-    <h3> Your saved notes: </h3>
+    <h2> Your saved notes: </h2>
     {% for post in posts %}
-    <div><p>{{ post.note }}</p></div>
+    <span style="color: blue;">{{ post.note }}</span>
+    <form action="" method="post" novalidate>
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.update_note.label }}<br>
+            {{ form.update_note(size=32) }}
+        </p>
+        <p>{{ form.update() }}</p>
+        <p>{{ form.delete() }}</p>
+        <p>{{ form.archive() }}</p>
+    </form>
+    <br>
+    <br>
     {% endfor %}
     {% endif %}
+    <p>
+        {{ form.new_note.label }}<br>
+        {{ form.new_note(size=32) }}
+    </p>
+    <p>{{ form.save() }}</p>
 </body>
 </html>

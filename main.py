@@ -4,7 +4,7 @@
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
 
 from flask import Flask, request, jsonify, render_template, flash, redirect
-from forms import RegistrationForm, LoginForm
+from forms import RegistrationForm, LoginForm, SavedNotesForm
 from config import Config
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -16,7 +16,10 @@ archived_notes = [
      'timestamp': '11:44:06'},
     {'id': 4,
      'note': 'fifth note',
-     'timestamp': '01:39:00'}
+     'timestamp': '01:39:00'},
+    {'id': 35,
+     'note': 'other note',
+     'timestamp': '19:45:30'}
 ]
 saved_notes = [
     {'id': 0,
@@ -26,7 +29,10 @@ saved_notes = [
      'note': 'second note',
      'timestamp': '13:09:00'},
     {'id': 2,
-     'title': 'third note',
+     'note': 'third note',
+     'timestamp': '19:45:30'},
+    {'id': 34,
+     'note': 'other note',
      'timestamp': '19:45:30'}
 ]
 
@@ -57,8 +63,9 @@ def login():
 @app.route('/')
 @app.route('/index')
 def index():
+    form = SavedNotesForm()
     user = {'username': 'Giulia'}
-    return render_template('index.html', title='Home - Saved Notes', user=user, posts=saved_notes)
+    return render_template('index.html', title='Home - Saved Notes', user=user, posts=saved_notes, form=form)
 
 
 @app.route('/archived', methods=['GET'])

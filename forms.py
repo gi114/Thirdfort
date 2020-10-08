@@ -23,3 +23,15 @@ class LoginForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired(), Length(min=2, max=15)])
     password = PasswordField('Password', validators=[DataRequired()])
     submit = SubmitField('Login')
+
+
+class SavedNotesForm(FlaskForm):
+    """
+    Enables users to update existing saved notes, save new ones, delete or archive them
+    """
+    new_note = StringField('Write new note here:', validators=[DataRequired()])
+    save = SubmitField('Save')
+    update_note = StringField('Update note here:', validators=[DataRequired()])
+    update = SubmitField('Update')
+    archive = SubmitField('Archive')
+    delete = SubmitField('Delete')
