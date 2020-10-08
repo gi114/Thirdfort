@@ -9,9 +9,16 @@
     {% if not posts %}
     <div><p> List of archived notes is empty </p></div>
     {% else %}
-    <h3> Your archived notes: </h3>
+    <h2> Your archived notes: </h2>
     {% for post in posts %}
-    <div><p>{{ post.note }}</p></div>
+    <p>{{ form.note(size=100, readonly="readonly", value=post.note) }}</p>
+
+    <form action="" method="post" novalidate>
+        {{ form.hidden_tag() }}
+        <p>{{ form.unarchive() }}</p>
+    </form>
+    <br>
+    <br>
     {% endfor %}
     {% endif %}
 </body>

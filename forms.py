@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField
+from wtforms import StringField, PasswordField, SubmitField, TextField
 from wtforms.validators import DataRequired, Length, Email, EqualTo
 
 
@@ -29,9 +29,18 @@ class SavedNotesForm(FlaskForm):
     """
     Enables users to update existing saved notes, save new ones, delete or archive them
     """
+    #note = TextField(validators=[DataRequired()])
     new_note = StringField('Write new note here:', validators=[DataRequired()])
     save = SubmitField('Save')
-    update_note = StringField('Update note here:', validators=[DataRequired()])
-    update = SubmitField('Update')
-    archive = SubmitField('Archive')
-    delete = SubmitField('Delete')
+    #update_note = StringField('Update note here:', validators=[DataRequired()])
+    #update = SubmitField('Update')
+    #archive = SubmitField('Archive')
+    #delete = SubmitField('Delete')
+
+
+class ArchivedNotesForm(FlaskForm):
+    """
+    Enables users to unarchive archived notes
+    """
+    note = TextField(validators=[DataRequired()])
+    unarchive = SubmitField('Unarchive')

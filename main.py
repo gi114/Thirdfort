@@ -4,8 +4,10 @@
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
 
 from flask import Flask, request, jsonify, render_template, flash, redirect
-from forms import RegistrationForm, LoginForm, SavedNotesForm
+from forms import RegistrationForm, LoginForm, SavedNotesForm, ArchivedNotesForm
 from config import Config
+from datetime import datetime
+now = datetime.now()
 app = Flask(__name__)
 app.config.from_object(Config)
 
@@ -61,48 +63,22 @@ def login():
 
 
 @app.route('/')
-@app.route('/index')
+@app.route('/index', methods=['GET', 'POST'])
 def index():
     form = SavedNotesForm()
     user = {'username': 'Giulia'}
+    if form.validate_on_submit():
+        flash('saving new note: {}'.format(
+            form.new_note.data))
+        return redirect('/archived')
     return render_template('index.html', title='Home - Saved Notes', user=user, posts=saved_notes, form=form)
 
 
-@app.route('/archived', methods=['GET'])
+@app.route('/archived', methods=['GET', 'POST'])
 def archived():
     user = {'username': 'Giulia'}
-    return render_template('archived.html', title='Home - Archived Notes', user=user, posts=archived_notes)
-
-
-# A route to return all of the available entries in our catalog.
-@app.route('/notes', methods=['GET'])
-def delete_note():
-    return jsonify(saved_notes)
-
-
-# A route to return all of the available entries in our catalog.
-@app.route('/notes', methods=['GET'])
-def save_note():
-    return jsonify(saved_notes)
-
-
-# A route to return all of the available entries in our catalog.
-@app.route('/notes', methods=['GET'])
-def update_note():
-    return jsonify(saved_notes)
-
-
-# A route to return all of the available entries in our catalog.
-@app.route('/notes', methods=['GET'])
-def archive_note():
-    return jsonify(saved_notes)
-
-
-# A route to return all of the available entries in our catalog.
-@app.route('/notes', methods=['GET'])
-def unarchived_note():
-    return jsonify(saved_notes)
-
+    form = ArchivedNotesForm()
+    return render_template('archived.html', title='Home - Archived Notes', user=user, posts=archived_notes, form=form)
 
 
 if __name__ == '__main__':
