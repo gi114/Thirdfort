@@ -25,17 +25,22 @@ class LoginForm(FlaskForm):
     submit = SubmitField('Login')
 
 
-class SavedNotesForm(FlaskForm):
+class SaveNoteForm(FlaskForm):
     """
     Enables users to update existing saved notes, save new ones, delete or archive them
     """
-    #note = TextField(validators=[DataRequired()])
     new_note = StringField('Write new note here:', validators=[DataRequired()])
     save = SubmitField('Save')
-    #update_note = StringField('Update note here:', validators=[DataRequired()])
-    #update = SubmitField('Update')
-    #archive = SubmitField('Archive')
-    #delete = SubmitField('Delete')
+
+
+class ModifyNoteForm(FlaskForm):
+    """
+    Enables users to update existing saved notes, save new ones, delete or archive them
+    """
+    update_note = StringField('Update note here:', validators=[DataRequired()])
+    update = SubmitField('Update')
+    archive = SubmitField('Archive')
+    delete = SubmitField('Delete')
 
 
 class ArchivedNotesForm(FlaskForm):

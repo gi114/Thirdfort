@@ -2,11 +2,21 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title></title>
+    <title>Title</title>
 </head>
 <body>
-    {% for note in notes %}
-    <h1>{{ note.title }}</h1>
-    {% endfor %}
+    <h3>{{title}}</h3>
+    <form action="" method="post" novalidate>
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.update_note.label }}<br>
+            {{ form.update_note(size=32) }}
+            {{ form.update() }}
+        </p>
+        <p>
+            {{ form.archive() }}<br>
+        </p>
+        <p>{{ form.delete() }}</p>
+    </form>
 </body>
 </html>
