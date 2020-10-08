@@ -70,7 +70,13 @@ def index():
     if form.validate_on_submit():
         flash('saving new note: {}'.format(
             form.new_note.data))
-        return redirect('/archived')
+        new_note = {
+            'id': 34,
+            'note': str(form.new_note.data),
+            'timestamp': now.strftime("%d/%m/%Y %H:%M:%S")
+        }
+        saved_notes.append(new_note)
+        return redirect('/index')
     return render_template('index.html', title='Home - Saved Notes', user=user, posts=saved_notes, form=form)
 
 
