@@ -41,6 +41,7 @@ saved_notes = [
 user = {'username': 'Giulia'}
 
 
+@app.route('/')
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     # create an instance of a form
