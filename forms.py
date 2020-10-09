@@ -43,9 +43,8 @@ class ModifyNoteForm(FlaskForm):
     delete = SubmitField('Delete')
 
 
-class ArchivedNotesForm(FlaskForm):
+class ArchivedNoteForm(FlaskForm):
     """
     Enables users to unarchive archived notes
     """
-    note = TextField(validators=[DataRequired()])
     unarchive = SubmitField('Unarchive')

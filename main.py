@@ -4,7 +4,7 @@
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
 
 from flask import Flask, request, jsonify, render_template, flash, redirect
-from forms import RegistrationForm, LoginForm, SaveNoteForm, ModifyNoteForm, ArchivedNotesForm
+from forms import RegistrationForm, LoginForm, SaveNoteForm, ModifyNoteForm, ArchivedNoteForm
 from config import Config
 from datetime import datetime
 now = datetime.now()
@@ -110,8 +110,21 @@ def note(note_id):
 @app.route('/archived', methods=['GET', 'POST'])
 def archived():
     user = {'username': 'Giulia'}
-    form = ArchivedNotesForm()
-    return render_template('archived.html', title='Home - Archived Notes', user=user, posts=archived_notes, form=form)
+    return render_template('archived.html', title='Home - Archived Notes', user=user, posts=archived_notes)
+
+
+@app.route('/archived/<note_id>', methods=['GET', 'POST'])
+def archived_note(note_id):
+    form = ArchivedNoteForm()
+    for archived_note in archived_notes:
+        if archived_note['id'] == int(note_id):
+            idx = int(archived_notes.index(archived_note))
+            title = archived_note['note']
+    if form.validate_on_submit():
+        to_be_saved = archived_notes.pop(idx)
+        saved_notes.append(to_be_saved)
+        return redirect('/archived')
+    return render_template('unarchive.html', title=title, form=form)
 
 
 if __name__ == '__main__':

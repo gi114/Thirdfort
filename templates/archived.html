@@ -11,12 +11,7 @@
     {% else %}
     <h2> Your archived notes: </h2>
     {% for post in posts %}
-    <p>{{ form.note(size=100, readonly="readonly", value=post.note) }}</p>
-
-    <form action="" method="post" novalidate>
-        {{ form.hidden_tag() }}
-        <p>{{ form.unarchive() }}</p>
-    </form>
+    <a href="{{ url_for('archived_note', note_id=post.id) }}">{{post.note}}</a>
     <br>
     <br>
     {% endfor %}
