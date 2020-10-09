@@ -50,3 +50,4 @@ There is a number of features that must be added to a fully functioning API. The
 - **Extend testing to every functionality of the app**
 - Improve app flow by requiring login before accessing any other content
 - **Add error handlers**
+- Extend the metadata for each note and user
