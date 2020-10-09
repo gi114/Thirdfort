@@ -11,6 +11,8 @@ now = datetime.now()
 app = Flask(__name__)
 app.config.from_object(Config)
 
+# TODO: add a database to handle data storage. The following data structures storing the user's username, archived and
+#  saved notes are only used to simulate querying data from a custom db.
 
 archived_notes = [
     {'id': 3,
