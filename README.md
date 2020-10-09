@@ -11,6 +11,10 @@
 6. This step will run the web server. Navigate to the localhost address provided and add path `/login` or `/register`
 7. You can now sign in and use the app!
 
+#### Test:
+
+Run the tests by typing ```python -m unittest test\test_main.py```
+
 ## Instructions to the UX team
 
 The `/index` route takes to the main page for each user where the list his/her personal notes are show. 
@@ -43,3 +47,6 @@ There is a number of features that must be added to a fully functioning API. The
 - Add rules to manage notes ID and enable reusing ID of deleted notes
 - Display notes by timestamps (most recent first)
 - Add a database to manage multiple users, save posts and updates
+- **Extend testing to every functionality of the app**
+- Improve app flow by requiring login before accessing any other content
+- **Add error handlers**
