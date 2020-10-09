@@ -38,6 +38,8 @@ saved_notes = [
      'timestamp': '19:45:30'}
 ]
 
+user = {'username': 'Giulia'}
+
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -47,6 +49,7 @@ def register():
     if form.validate_on_submit():
         flash('Login requested for user {}'.format(
             form.username.data))
+        user['username'] = form.username.data
         return redirect('/index')
     return render_template('register.html', title='Sign Up', form=form)
 
@@ -58,6 +61,7 @@ def login():
     if form.validate_on_submit():
         flash('Login requested for user {}'.format(
             form.username.data))
+        user['username'] = form.username.data
         return redirect('/index')
     return render_template('login.html', title='Login', form=form)
 
@@ -66,7 +70,6 @@ def login():
 @app.route('/index', methods=['GET', 'POST'])
 def index():
     form = SaveNoteForm()
-    user = {'username': 'Giulia'}
     if form.validate_on_submit():
         flash('saving new note: {}'.format(
             form.new_note.data))
@@ -109,7 +112,6 @@ def note(note_id):
 
 @app.route('/archived', methods=['GET', 'POST'])
 def archived():
-    user = {'username': 'Giulia'}
     return render_template('archived.html', title='Home - Archived Notes', user=user, posts=archived_notes)
 
 
