@@ -87,7 +87,11 @@ def note(note_id):
         if saved_note['id'] == int(note_id):
             idx = saved_notes.index(saved_note)
             title = saved_note['note']
-
+    if form.update.data and form.validate_on_submit():
+        flash('updating new note: {}'.format(
+            form.update_note.data))
+        saved_notes[int(idx)]['note'] = form.update_note.data
+        return redirect('/index')
     return render_template('note.html', title=title, form=form)
 
 
