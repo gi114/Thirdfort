@@ -85,13 +85,20 @@ def note(note_id):
     form = ModifyNoteForm()
     for saved_note in saved_notes:
         if saved_note['id'] == int(note_id):
-            idx = saved_notes.index(saved_note)
+            idx = int(saved_notes.index(saved_note))
             title = saved_note['note']
     if form.update.data and form.validate_on_submit():
         flash('updating new note: {}'.format(
             form.update_note.data))
-        saved_notes[int(idx)]['note'] = form.update_note.data
+        if len(form.update_note.data) > 0:
+            saved_notes[idx]['note'] = form.update_note.data
         return redirect('/index')
+    elif form.delete.data and form.validate_on_submit():
+        flash('deleting note: {}'.format(
+            saved_notes[idx]['note']))
+        saved_notes.pop(idx)
+        return redirect('/index')
+
     return render_template('note.html', title=title, form=form)
 
 
