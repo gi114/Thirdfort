@@ -98,7 +98,12 @@ def note(note_id):
             saved_notes[idx]['note']))
         saved_notes.pop(idx)
         return redirect('/index')
-
+    elif form.archive.data and form.validate_on_submit():
+        flash('archiving note: {}'.format(
+            saved_notes[idx]['note']))
+        to_be_archived = saved_notes.pop(idx)
+        archived_notes.append(to_be_archived)
+        return redirect('/archived')
     return render_template('note.html', title=title, form=form)
 
 
